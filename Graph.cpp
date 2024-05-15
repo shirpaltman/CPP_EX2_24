@@ -92,9 +92,36 @@ namespace ariel{
             return neighbors;
         }
 
+        
+
+bool operator==(const Graph & graph1, const Graph graph2){
+return false;
+}
+
+bool operator!=(const Graph graph1, const Graph graph2){
+    return false;
+}
+Graph operator+(Graph graph1, Graph graph2){
+    return Graph();
+}
+Graph operator-(Graph graph1, Graph graph2){
+    return Graph();
+}
+Graph operator*(Graph graph1, Graph graph2){
+    return Graph();
+}
+void operator+(Graph &mygraph){
+}
+void operator++(Graph &mygraph){
+}
+void operator--(Graph &mygraph){
+}
+void operator-(Graph &mygraph){
+}
+void operator*=(Graph &mygraph, int digit){
+}
+void operator<<(ostream os, Graph &myGraph){
+}
+void operator/=(Graph &myGraph, int digit){
+}
 };
-
-
-
-
-
