@@ -31,8 +31,12 @@ namespace ariel{
         void printGraph()const;
         int getWeight(unsigned int numRow,unsigned int numCol)const;
         std::vector<int>getNeighbors(unsigned int ver)const ;
-        friend bool operator==(const Graph& graph1,const Graph graph2);
+        friend bool operator<(const Graph graph1,const Graph graph2);
+        friend bool operator>(const Graph graph1,const Graph graph2);
+        friend bool operator==(const Graph& graph1,const Graph& graph2);
         friend bool operator!=(const Graph graph1, const Graph graph2);
+        friend bool operator<=(const Graph graph1,const Graph graph2);
+        friend bool operator>=( const Graph graph1,const Graph graph2);
         friend Graph operator+ (Graph graph1, Graph graph2);
         friend Graph operator- (Graph graph1, Graph graph2);
         friend Graph operator*(Graph graph1, Graph graph2);
@@ -43,7 +47,7 @@ namespace ariel{
         friend void operator*=(Graph& mygraph,int digit);
         friend void operator<<(ostream os,Graph& myGraph);
         friend void operator/=(Graph& myGraph,int digit);
-        
+
 
 
 

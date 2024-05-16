@@ -94,14 +94,43 @@ namespace ariel{
 
         
 
-bool operator==(const Graph & graph1, const Graph graph2){
-return false;
+bool operator==(const Graph&  graph1, const Graph& graph2){
+    if(graph1.getAdjMat().size()!=graph2.getAdjMat().size()){
+        return false;
+    }
+    if(graph1.getAdjMat() == graph2.getAdjMat()) {
+        return true;
+    }
+    else{
+        return false ;
+    }
+}
+bool operator!=(const Graph graph1, const Graph graph2)
+{
+    return (!(graph1==graph2));
 }
 
-bool operator!=(const Graph graph1, const Graph graph2){
+bool operator<(const Graph graph1, const Graph graph2)
+{
     return false;
 }
-Graph operator+(Graph graph1, Graph graph2){
+
+bool operator>(const Graph graph1, const Graph graph2)
+{
+    return false;
+}
+
+
+bool operator<=(const Graph graph1, const Graph graph2)
+{
+    return false;
+}
+bool operator>=(const Graph graph1, const Graph graph2)
+{
+    return false;
+}
+Graph operator+(Graph graph1, Graph graph2)
+{
     return Graph();
 }
 Graph operator-(Graph graph1, Graph graph2){

@@ -269,3 +269,23 @@ TEST_CASE("Test isBipartite - Non-Bipartite Graph") {
     CHECK(Algorithms::isBipartite(g) == false); // Graph is not bipartite
 }
 
+TEST_CASE("Test operator==") {
+    Graph g1, g2, g3;
+    g1.loadGraph({{0, 1}, {1, 0}});
+    g2.loadGraph({{0, 1}, {1, 0}});
+    g3.loadGraph({{0, 1}, {0, 1}});
+    
+    CHECK(g1==g2);
+    CHECK_FALSE(g1 == g3);
+}
+TEST_CASE("Test operator!=") {
+    Graph g1, g2, g3;
+    g1.loadGraph({{0, 1}, {1, 0}});
+    g2.loadGraph({{0, 1}, {1, 0}});
+    g3.loadGraph({{0, 1}, {0, 1}});
+    
+    CHECK_FALSE(g1!=g2);
+    CHECK(g1 != g3);
+}
+
+
