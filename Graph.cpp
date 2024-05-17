@@ -105,52 +105,123 @@ bool operator==(const Graph&  graph1, const Graph& graph2){
         return false ;
     }
 }
-bool operator!=(const Graph graph1, const Graph graph2)
-{
+bool operator!=(const Graph graph1, const Graph graph2){
     return (!(graph1==graph2));
 }
 
-bool operator<(const Graph graph1, const Graph graph2)
-{
+bool operator<(const Graph graph1, const Graph graph2){
+   if(graph1.totalVertices >graph2.totalVertices){
+        return false;
+     } 
+
+    return false;
+}
+bool isSubset(const Graph& graph1,const Graph& graph2){
+    
+}
+bool operator>(const Graph graph1, const Graph graph2){
     return false;
 }
 
-bool operator>(const Graph graph1, const Graph graph2)
-{
-    return false;
-}
 
-
-bool operator<=(const Graph graph1, const Graph graph2)
-{
-    return false;
+bool operator<=(const Graph graph1, const Graph graph2){
+    return (!(graph1>graph2));
 }
-bool operator>=(const Graph graph1, const Graph graph2)
-{
-    return false;
+bool operator>=(const Graph graph1, const Graph graph2){
+    return (!(graph1<graph2));
 }
-Graph operator+(Graph graph1, Graph graph2)
-{
-    return Graph();
+Graph operator+(Graph graph1, Graph graph2){
+    if(graph1.getNumVertices()!=graph2.totalVertices){
+        throw std::invalid_argument("have to have the same number of vertices ");
+    }
+    Graph res;
+    res.totalVertices=graph1.totalVertices;
+    for(size_t i=0;i<res.totalVertices; ++i){
+      
+        for(size_t j=0;j<res.totalVertices;j++){
+            res.adjMat[i][j]=graph1.getAdjMat()[i][j]+graph2.getAdjMat()[i][j];
+        }
+    }
+    return res;
 }
 Graph operator-(Graph graph1, Graph graph2){
-    return Graph();
+    if(graph1.getNumVertices()!=graph2.totalVertices){
+        throw std::invalid_argument("have to have the same number of vertices");
+    }
+    Graph res;
+    res.totalVertices=graph1.totalVertices;
+    for(size_t i=0;i<res.totalVertices; ++i){
+        for(size_t j=0;j<res.totalVertices;j++){
+            res.adjMat[i][j]=graph1.getAdjMat()[i][j]-graph2.getAdjMat()[i][j];
+        }
+    }
+    return res;
 }
 Graph operator*(Graph graph1, Graph graph2){
-    return Graph();
+    if(graph1.getNumVertices()!=graph2.totalVertices){
+        throw std::invalid_argument("doesn't follow the rules for multiplucation");
+    }
+    Graph res;
+    res.totalVertices=graph1.totalVertices;
+    for(size_t i=0;i<res.totalVertices; ++i){
+        for(size_t j=0;j<res.totalVertices;j++){
+            res.adjMat[i][j]=graph1.adjMat[i][j]*graph2.adjMat[i][j];
+        }
+    }
+    return res;
 }
-void operator+(Graph &mygraph){
+void operator+(Graph &myGraph){
+    for(size_t i=0;i<myGraph.totalVertices; ++i){
+        for(size_t j=0;j<myGraph.totalVertices;j++){
+            myGraph.adjMat[i][j]=(myGraph.adjMat[i][j])*1;
+        }
+    }    
 }
-void operator++(Graph &mygraph){
+void operator++(Graph &myGraph){
+    for(size_t i=0; i< myGraph.adjMat.size();++i){
+        for( size_t j=0;j< myGraph.adjMat.size();++j){
+            ++(myGraph.adjMat[i][j] );
+        }
+    }
 }
-void operator--(Graph &mygraph){
+void operator--(Graph &myGraph){
+    for(size_t i=0; i< myGraph.adjMat.size();++i){
+        for( size_t j=0;j< myGraph.adjMat.size();++j){
+            --(myGraph.adjMat[i][j]) ;
+        }
+    }
 }
-void operator-(Graph &mygraph){
+void operator-(Graph &myGraph){
+    for(size_t i=0; i< myGraph.adjMat.size();++i){
+        for( size_t j=0;j< myGraph.adjMat.size();++j){
+            myGraph.adjMat[i][j]=myGraph.adjMat[i][j]*(-1);
+        }
+    }  
 }
-void operator*=(Graph &mygraph, int digit){
+void operator*=(Graph &myGraph, int digit){
+    for(size_t i=0; i< myGraph.adjMat.size();++i){
+        for( size_t j=0;j< myGraph.adjMat.size();++j){
+            myGraph.adjMat[i][j]=(myGraph.adjMat[i][j])*digit ;
+        }
+    }
 }
-void operator<<(ostream os, Graph &myGraph){
+void operator<<(ostream os,const Graph &myGraph){
+    for(const auto& row:myGraph.getAdjMat()){
+        for(const auto& vertex:row){
+            os<<vertex<<" ";
+        }
+        os<<std::endl;  
+    }
+
 }
 void operator/=(Graph &myGraph, int digit){
+    for(size_t i=0; i< myGraph.adjMat.size();++i){
+        for( size_t j=0;j< myGraph.adjMat.size();++j){
+            myGraph.adjMat[i][j]=(myGraph.adjMat[i][j])/digit ;
+        }
+    }
 }
+            
+        
+    
 };
