@@ -17,6 +17,7 @@ using namespace std;
 
 int main()
 {
+    
     ariel::Graph g1;
     // 3x3 matrix that represents a connected graph.
     vector<vector<int>> graph = {
@@ -24,8 +25,8 @@ int main()
         {1, 0, 1},
         {0, 1, 0}};
     g1.loadGraph(graph); // Load the graph to the object.
-
-   // cout<<g1; // Should print the matrix of the graph: [0, 1, 0], [1, 0, 1], [0, 1, 0]
+    
+    cout << g1; // Should print the matrix of the graph: [0, 1, 0], [1, 0, 1], [0, 1, 0]
 
     // 3x3 matrix that represents a weighted connected graph.
     vector<vector<int>> weightedGraph = {
@@ -34,10 +35,10 @@ int main()
         {1, 2, 0}};
     ariel::Graph g2;
     g2.loadGraph(weightedGraph); // Load the graph to the object.
-
+    
     ariel::Graph g3 = g1 + g2; // Add the two graphs together.
-    //cout<<g3;           // Should print the matrix of the graph: [0, 2, 1], [2, 0, 3], [1, 3, 0]
-
+    cout<<g3;           // Should print the matrix of the graph: [0, 2, 1], [2, 0, 3], [1, 3, 0]
+    
     g1 *= -2;        // Multiply the graph by -2.
     //cout<<g1; // Should print the matrix of the graph: [0, -2, 0], [-2, 0, -2], [0, -2, 0]
 
