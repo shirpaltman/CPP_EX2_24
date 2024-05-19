@@ -77,11 +77,13 @@ namespace ariel
 
     int ariel::Graph ::getWeight(unsigned int numRow, unsigned int numCol) const
     {
+        std::cout<<"entering getweight method with row:" << numRow <<"and colum" << numCol <<std::endl;
         // check that the colum and row meets the conditions (within the limits)
         if (numRow >= totalVertices || numCol >= totalVertices)
         {
             throw std::out_of_range("the node is out of range! ");
         }
+        std::cout<<"exiting getweight method with row:" << numRow << "and column" <<numCol << std::endl;
         return adjMat[numRow][numCol];
     }
 
@@ -222,17 +224,21 @@ namespace ariel
         {
             throw std::invalid_argument("have to have the same number of vertices ");
         }
-        Graph res;
-        res.totalVertices = graph1.totalVertices;
-        for (size_t i = 0; i < res.totalVertices; ++i)
-        {
+        const auto& graph1Mat = graph1.getAdjMat();
+        const auto& graph2Mat = graph2.getAdjMat();
+        Graph result;
 
-            for (size_t j = 0; j < res.totalVertices; j++)
+        result.adjMat.resize(static_cast<std::size_t>(graph1.getNumVertices()), 
+                     std::vector<int>(static_cast<std::size_t>(graph1.getNumVertices()), 0));
+
+        for (size_t i = 0; i < graph1Mat.size(); ++i)
+        {
+            for (size_t j = 0; j < graph2Mat.size(); j++)
             {
-                res.adjMat[i][j] = graph1.getAdjMat()[i][j] + graph2.getAdjMat()[i][j];
+                result.adjMat[i][j] = graph1.getAdjMat()[i][j] + graph2.getAdjMat()[i][j];
             }
         }
-        return res;
+        return result;
     }
     Graph operator-(Graph graph1, Graph graph2)
     {
@@ -253,20 +259,26 @@ namespace ariel
     }
     Graph operator*(Graph graph1, Graph graph2)
     {
-        if (graph1.getNumVertices() != graph2.totalVertices)
-        {
+        if (graph1.getNumVertices() != graph2.getNumVertices()){
             throw std::invalid_argument("doesn't follow the rules for multiplucation");
         }
-        Graph res;
-        res.totalVertices = graph1.totalVertices;
-        for (size_t i = 0; i < res.totalVertices; ++i)
+        Graph result;
+        result.adjMat.resize(static_cast<std::size_t>(graph1.getNumVertices()), 
+                     std::vector<int>(static_cast<std::size_t>(graph1.getNumVertices()), 0));
+        for (size_t i = 0; i < result.adjMat.size(); ++i)
         {
-            for (size_t j = 0; j < res.totalVertices; j++)
+            for (size_t j = 0; j < result.adjMat.size(); j++)
             {
-                res.adjMat[i][j] = graph1.adjMat[i][j] * graph2.adjMat[i][j];
+                if (i==j){
+                    continue;
+                }
+                for (size_t k = 0; k < result.adjMat.size(); k++)
+                {
+                result.adjMat[i][j] += graph1.adjMat[i][k] * graph2.adjMat[k][j];
+                }
             }
         }
-        return res;
+        return result;
     }
     void operator+(Graph &myGraph)
     {
@@ -331,6 +343,9 @@ namespace ariel
     }
     void operator/=(Graph &myGraph, int digit)
     {
+        if(digit==0){
+            throw std::runtime_error("Division by zero");
+        }
         for (size_t i = 0; i < myGraph.adjMat.size(); ++i)
         {
             for (size_t j = 0; j < myGraph.adjMat.size(); ++j)
