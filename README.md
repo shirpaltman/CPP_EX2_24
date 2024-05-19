@@ -7,7 +7,7 @@
 
 
 ***
-### 🎓 Welcome to Shir's Algorithms Adventure! 🚀
+### 🎓 Welcome to Shir's Algorithms Adventure! (exe1+2)🚀
 
 ### Get ready to embark on an exciting journey through the fascinating algorithms I imlementeted in this assigment here you have a README for what's to come in first taks for this semster 🌟 ###
 
@@ -58,13 +58,13 @@ _**Graph.cpp is the implementation file for the Graph class. This class represen
 
 The *Graph* class is the core component of this library, offering functionalities for representing and manipulating graphs.
 
-*Attributes:*
+**Attributes:**
 ### adjMat
  A 2D vector representing the adjacency matrix of the graph.
 ### totalVertices
  The total number of vertices in the graph.
 
-*Methods:*
+**Methods:**
 ### getNumVertices
 Returns the total number of vertices in the graph.
 ### getAdjMat
@@ -79,3 +79,43 @@ Prints the graph in a readable format.
 Returns the weight of the edge between two vertices.
 ### getNeighbors
  Returns a vector of neighboring vertices for a given vertex.
+
+***
+###  Operator Overloads ###
+The Graph class supports a variety of operator overloads for intuitive graph manipulation:
+***
+ **Friend Functions:**
+### operator<
+Checks if one graph is less than another graph.
+### isSubset
+Checks if one graph is a subset of another graph.
+### operator>
+Checks if one graph is greater than another graph.
+### operator==
+Checks if two graphs are equal.
+### operator!=
+Checks if two graphs are not equal.
+### operator<=
+Checks if one graph is less than or equal to another graph.
+### operator>=
+Checks if one graph is greater than or equal to another graph.
+### operator+
+Adds two graphs together.
+### operator-
+Subtracts one graph from another.
+### operator*
+Multiplies two graphs together.
+### operator+
+Unary operator that does not change the graph.
+### operator++
+Unary operator that adds 1 to every element of the graph.
+### operator--
+Unary operator that subtracts 1 from every element of the graph.
+### operator-
+Unary operator that multiplies every element of the graph by -1.
+### operator*=
+Compound assignment operator that multiplies every element of the graph by a specified digit.
+### operator<<
+Stream insertion operator that allows printing the graph to an output stream.
+### operator/=
+Compound assignment operator that divides every element of the graph by a specified digit.

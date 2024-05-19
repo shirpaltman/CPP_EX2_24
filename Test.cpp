@@ -287,7 +287,344 @@ TEST_CASE("Test operator!=") {
     CHECK_FALSE(g1!=g2);
     CHECK(g1 != g3);
 }
+TEST_CASE("Test1 <operator") {
+    Graph graph1, graph2;
+    graph1.loadGraph({{0,1,0,0,0}, {1,0,1,0,0},{0,1,0,1,0},{0,0,1,0,1},{0,0,0,1,0}});
+    graph2.loadGraph({{0,1,0,0,0,0}, {1,0,1,0,0,0},{0,1,0,1,0,0},{0,0,1,0,1,0},{0,0,0,1,0,1},{0,0,0,0,1,0}});
+    CHECK(graph1<graph2);
+    CHECK_FALSE(graph2<graph1);
+}
+TEST_CASE("Test2 <operator") {
+    Graph graph1, graph2;
+    graph1.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
 
+    graph2.loadGraph({              
+            {0, 1, 0, 0, 0},
+            {1, 0, 1, 0, 0},
+            {0, 1, 0, 1, 0},
+            {0, 0, 1, 0, 1},
+            {0, 0, 0, 1, 0}});
+    CHECK(graph1<graph2);
+    CHECK_FALSE(graph2<graph1);
+}
+TEST_CASE("Test1 > operator") {
+    Graph graph1, graph2;
+    graph2.loadGraph({{0,1,0,0,0}, {1,0,1,0,0},{0,1,0,1,0},{0,0,1,0,1},{0,0,0,1,0}});
+    graph1.loadGraph({{0,1,0,0,0,0}, {1,0,1,0,0,0},{0,1,0,1,0,0},{0,0,1,0,1,0},{0,0,0,1,0,1},{0,0,0,0,1,0}});
+    CHECK(graph1>graph2);
+    CHECK_FALSE(graph2>graph1);
+}
+TEST_CASE("Test2 > operator") {
+    Graph graph1, graph2;
+    graph2.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
 
+    graph1.loadGraph({              
+            {0, 1, 0, 0, 0},
+            {1, 0, 1, 0, 0},
+            {0, 1, 0, 1, 0},
+            {0, 0, 1, 0, 1},
+            {0, 0, 0, 1, 0}});
+    CHECK(graph1>graph2);
+    CHECK_FALSE(graph2>graph1);
+}
+TEST_CASE("Test tricky > operator") {
+  Graph graph1, graph2;
+  graph1.loadGraph({
+    {0,1},
+    {1,0}});
+  graph2.loadGraph({{0}});
+  CHECK(graph1 >graph2);
+}
+TEST_CASE("Test tricky < operator") {
+  Graph graph1, graph2;
+  graph2.loadGraph({
+    {0,1},
+    {1,0}});
+  graph1.loadGraph({{0}});
+  CHECK(graph1 < graph2);
+}
+TEST_CASE("Test equal operator") {
 
+Graph graph1, graph2,graph3;
+    graph2.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph1.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph3.loadGraph({              
+        {0, 1, 0, 0, 0},
+        {1, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1},
+        {0, 0, 0, 1, 0}});
 
+        CHECK(graph1==graph2);
+        CHECK_FALSE(graph1==graph3);   
+}
+TEST_CASE("Test tricky < operator") {
+
+    Graph graph1, graph2;
+    graph2.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph1.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    CHECK_FALSE(graph1<graph2);
+}
+TEST_CASE("Test not equal operator") {
+
+    Graph graph1, graph2,graph3;
+    graph2.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph1.loadGraph({
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph3.loadGraph({              
+        {0, 1, 0, 0, 0},
+        {1, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1},
+        {0, 0, 0, 1, 0}});
+
+        CHECK_FALSE(graph1!=graph2);
+        CHECK(graph1!=graph3);
+       
+}
+TEST_CASE("test >=operator"){
+    Graph graph1, graph2;
+    graph2.loadGraph({          
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph1.loadGraph({                          
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    CHECK(graph1>=graph2);
+}
+TEST_CASE("test <=operator"){
+    Graph graph1, graph2;
+    graph2.loadGraph({          
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph1.loadGraph({                          
+        {0, 1, 0, 0, 0},
+        {1, 0, 1, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 1, 0, 1},
+        {0, 0, 0, 1, 0}});
+    CHECK(graph2<=graph1);
+}
+TEST_CASE("test +operator two graph"){
+    Graph graph1, graph2, graph3;
+    graph1.loadGraph({        
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph2.loadGraph({        
+        {0, 0, 1, 0},
+        {0, 0, 0, 1},
+        {1, 0, 0, 0},
+        {0, 1, 0, 0}});
+    graph3.loadGraph({        
+        {0, 1, 1, 0},
+        {1, 0, 1, 1},
+        {1, 1, 0, 1},
+        {0, 1, 1, 0}});
+    CHECK((graph1+graph2)==graph3);
+}
+TEST_CASE("test -operator two graph"){
+    Graph graph1, graph2, graph3,graph4;
+    graph1.loadGraph({        
+        {0, 1, 1, 0},
+        {1, 0, 1, 1},
+        {1, 1, 0, 1},
+        {0, 1, 1, 0}});
+    graph2.loadGraph({        
+        {0, 0, 1, 0},
+        {0, 0, 0, 1},
+        {1, 0, 0, 0},
+        {0, 1, 0, 0}});
+    graph3.loadGraph({        
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph4=graph1-graph2;
+    CHECK(graph4==graph3);
+}
+TEST_CASE("test +operator two graph"){
+    Graph graph1, graph2, graph3;
+    graph1.loadGraph({        
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph2.loadGraph({        
+        {0, 0, 1, 0},
+        {0, 0, 0, 1},
+        {1, 0, 0, 0},
+        {0, 1, 0, 0}});
+    graph3.loadGraph({        
+        {0, 1, 1, 0},
+        {1, 0, 1, 1},
+        {1, 1, 0, 1},
+        {0, 1, 1, 0}});
+    CHECK((graph1+graph2)==graph3);
+}
+TEST_CASE("test *operator two graph"){
+
+    Graph graph1, graph2, graph3;
+    graph1.loadGraph({        
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph2.loadGraph({        
+        {0, 0, 1, 0},
+        {0, 0, 0, 1},
+        {1, 0, 0, 0},
+        {0, 1, 0, 0}});
+    graph3.loadGraph({        
+        {0, 0, 0, 1},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {1, 0, 0, 0}});
+    CHECK((graph1*graph2)==graph3);
+}
+TEST_CASE("test ++operator "){
+    
+    Graph graph1, graph2, graph3;
+    graph1.loadGraph({        
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph2.loadGraph({        
+        {1, 2, 1, 1},
+        {2, 1, 2, 1},
+        {1, 2, 1, 2},
+        {1, 1, 2, 1}});
+        ++graph1;
+
+    CHECK(graph1==graph2);
+}
+TEST_CASE("test --operator "){
+    
+    Graph graph1, graph2, graph3;
+    graph1.loadGraph({        
+        {0, 1, 0, 0},
+        {1, 0, 1, 0},
+        {0, 1, 0, 1},
+        {0, 0, 1, 0}});
+    graph2.loadGraph({        
+        {1, 2, 1, 1},
+        {2, 1, 2, 1},
+        {1, 2, 1, 2},
+        {1, 1, 2, 1}});
+        --graph2;
+
+    CHECK(graph2==graph1);
+}
+TEST_CASE("test +operator graph (unary)"){
+    
+    Graph graph1, graph2 ;
+    graph1.loadGraph({        
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
+    graph2.loadGraph({        
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
+    
+        +graph1;
+
+    CHECK(graph1==graph2);
+}
+
+TEST_CASE("test +operator graph (unary)"){
+    
+    Graph graph1, graph2 ;
+    graph1.loadGraph({        
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
+    graph2.loadGraph({        
+        {-1, -2, -3},
+        {-4, -5, -6},
+        {-7, -8, -9}
+
+    });
+    
+        -graph1;
+
+    CHECK(graph1==graph2);
+}
+TEST_CASE("test *=operator graph (with a digit)"){
+    
+    Graph graph1, graph2 ;
+    graph1.loadGraph({        
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
+    graph2.loadGraph({        
+        {2,4,6},
+        {8,10,12},
+        {14,16,18}
+    });
+    
+    graph1*=2;
+
+    CHECK(graph1==graph2);
+}
+TEST_CASE("test /=operator graph (with a digit)"){
+    
+    Graph graph1, graph2 ;
+    graph1.loadGraph({        
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
+    graph2.loadGraph({        
+        {2,4,6},
+        {8,10,12},
+        {14,16,18}
+    });
+    
+    graph2/=2;
+
+    CHECK(graph2==graph1);
+}
